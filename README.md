@@ -14,6 +14,14 @@ A lightweight, pure Bash library for loading, setting, and managing environment 
 
 ## Installation
 
+### One-Line Install
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hattan/dot_env_bash/main/install.sh | bash
+```
+
+### Manual Installation
+
 Simply source the library in your script:
 
 ```bash
