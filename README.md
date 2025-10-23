@@ -52,6 +52,40 @@ echo "Connecting to $DB_HOST:$DB_PORT"
 echo "Database: $DB_NAME"
 ```
 
+## Running the Examples
+
+You can test the library immediately using the provided examples:
+
+```bash
+# Clone or download this repository
+cd /path/to/dotenv
+
+# Run the basic load example
+./example/load.sh
+```
+
+**Expected output:**
+```
+ARM_SUBSCRIPTION_ID="123123-12312-123123-123"
+ARM_AAAAI="2222-2222-2222-2222"
+ARM_TENANT_ID=5555-5555-555-555
+COUNT=2
+FOO=new_value
+```
+
+This demonstrates loading all variables from the `.env` file in the project root. Try the other examples:
+
+```bash
+# Test setting a variable
+./example/set.sh "updated_value"
+
+# Test removing a variable  
+./example/unset.sh
+
+# Test using a custom environment file
+./example/custom_env_file.sh
+```
+
 ## API Reference
 
 ### `dot_env_load`

@@ -9,7 +9,7 @@ DOT_ENV_FILE="$SCRIPT_DIR/test.env"
 
 main() {
     dot_env_set "HELLO" "world"
-    
+
     dot_env_load
     print
 }
@@ -20,6 +20,7 @@ print(){
     echo "ARM_TENANT_ID=$ARM_TENANT_ID"
     echo "COUNT=$COUNT"
     echo "FOO=$FOO"
+    echo "DEBUG=$DEBUG"
 }
 # main
 main

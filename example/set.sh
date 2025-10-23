@@ -22,6 +22,7 @@ print(){
     echo "ARM_TENANT_ID=$ARM_TENANT_ID"
     echo "COUNT=$COUNT"
     echo "FOO=$FOO"
+    echo "DEBUG=$DEBUG"
 }
 # main
 main
