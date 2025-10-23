@@ -1,5 +1,8 @@
 # Bash Dot Env Library
 
+[![CI](https://github.com/hattan/dot_env_bash/actions/workflows/ci.yml/badge.svg)](https://github.com/hattan/dot_env_bash/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A lightweight, pure Bash library for loading, setting, and managing environment variables from `.env` files. This library handles comments, inline comments, quoted values, and files without trailing newlines.
 
 ## Features
