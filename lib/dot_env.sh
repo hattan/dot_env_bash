@@ -47,8 +47,8 @@ dot_env_set(){
     
     # Check if key already exists in env file
     if grep -q "^${key}=" "$DOT_ENV_FILE"; then
-        # Key exists, update it using sed
-        sed -i "s/^${key}=.*/${key}=${value}/" "$DOT_ENV_FILE"
+        # Key exists, update it using sed (cross-platform compatible)
+        sed -i.bak "s/^${key}=.*/${key}=${value}/" "$DOT_ENV_FILE" && rm -f "$DOT_ENV_FILE.bak"
         echo "Updated ${key} in $DOT_ENV_FILE"
     else
         # Key doesn't exist, add it to the end
@@ -80,8 +80,8 @@ dot_env_unset(){
         return 1
     fi
     
-    # Remove the key from the file
-    sed -i "/^${key}=/d" "$DOT_ENV_FILE"
+    # Remove the key from the file (cross-platform compatible)
+    sed -i.bak "/^${key}=/d" "$DOT_ENV_FILE" && rm -f "$DOT_ENV_FILE.bak"
     echo "Removed ${key} from $DOT_ENV_FILE"
     
     # Unset the variable from current environment
