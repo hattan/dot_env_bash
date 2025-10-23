@@ -351,8 +351,37 @@ fi
 │   ├── set.sh              # Setting variables example
 │   ├── unset.sh            # Removing variables example
 │   └── custom_env_file.sh  # Custom file path example
+├── test/
+│   ├── basic_spec.sh       # Basic functionality tests
+│   ├── dot_env_spec.sh     # Comprehensive test suite
+│   ├── spec_helper.sh      # Test utilities
+│   └── README.md           # Testing documentation
+├── install.sh              # Automated installation script
+├── Taskfile.yml            # Task runner configuration
+├── .shellspec              # ShellSpec test configuration
 ├── .env                    # Example environment file
 └── README.md               # This file
+```
+
+## Development
+
+### Running Tests
+
+```bash
+# Install task runner (if not already installed)
+curl -sL https://taskfile.dev/install.sh | sh
+
+# Run all tests
+task test
+
+# Run basic tests only
+task test-basic
+
+# Run examples
+task examples
+
+# Show all available tasks
+task help
 ```
 
 ## Requirements

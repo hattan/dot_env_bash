@@ -1,0 +1,149 @@
+version: '3'
+
+vars:
+  SHELLSPEC_URL: https://git.io/shellspec
+
+tasks:
+  default:
+    desc: Run all tests
+    cmds:
+      - task: test
+
+  install-shellspec:
+    desc: Install ShellSpec if not available
+    cmds:
+      - |
+        if ! command -v shellspec >/dev/null 2>&1; then
+          echo "Installing ShellSpec..."
+          curl -fsSL {{.SHELLSPEC_URL}} | sh -s -- --yes
+          export PATH="$HOME/.local/bin:$PATH"
+        else
+          echo "ShellSpec is already installed"
+        fi
+    silent: false
+
+  test-basic:
+    desc: Run basic tests only
+    deps: [install-shellspec]
+    cmds:
+      - echo "Running basic tests..."
+      - shellspec test/basic_spec.sh
+
+  test:
+    desc: Run all tests
+    deps: [install-shellspec]
+    cmds:
+      - echo "Running all tests..."
+      - shellspec
+
+  test-coverage:
+    desc: Run tests with coverage (if shellspec-coverage is available)
+    deps: [install-shellspec]
+    cmds:
+      - echo "Running tests with coverage..."
+      - shellspec --coverage || shellspec
+
+  test-verbose:
+    desc: Run tests in verbose mode
+    deps: [install-shellspec]
+    cmds:
+      - echo "Running tests in verbose mode..."
+      - shellspec --format tap
+
+  test-watch:
+    desc: Run tests in watch mode (requires entr or similar)
+    deps: [install-shellspec]
+    cmds:
+      - |
+        if command -v entr >/dev/null 2>&1; then
+          find lib/ test/ -name "*.sh" | entr -c shellspec
+        else
+          echo "Install 'entr' for watch mode: apt-get install entr"
+          exit 1
+        fi
+
+  clean:
+    desc: Clean up test artifacts
+    cmds:
+      - echo "Cleaning up test artifacts..."
+      - rm -rf coverage/
+      - rm -f .shellspec-quick.log
+      - rm -rf tmp/
+
+  lint:
+    desc: Run shellcheck on all shell files
+    cmds:
+      - echo "Running shellcheck..."
+      - |
+        if command -v shellcheck >/dev/null 2>&1; then
+          find . -name "*.sh" -not -path "./test/*" | xargs shellcheck
+        else
+          echo "Install shellcheck for linting: apt-get install shellcheck"
+        fi
+
+  format:
+    desc: Format shell files with shfmt
+    cmds:
+      - echo "Formatting shell files..."
+      - |
+        if command -v shfmt >/dev/null 2>&1; then
+          find . -name "*.sh" | xargs shfmt -w -i 4
+        else
+          echo "Install shfmt for formatting: go install mvdan.cc/sh/v3/cmd/shfmt@latest"
+        fi
+
+  examples:
+    desc: Run all examples
+    cmds:
+      - task: example-load
+      - task: example-set
+      - task: example-unset
+
+  example-load:
+    desc: Run load example
+    cmds:
+      - echo "Running load example..."
+      - ./example/load.sh
+
+  example-set:
+    desc: Run set example
+    cmds:
+      - echo "Running set example..."
+      - ./example/set.sh "test_value"
+
+  example-unset:
+    desc: Run unset example
+    cmds:
+      - echo "Running unset example..."
+      - ./example/unset.sh
+
+  example-custom:
+    desc: Run custom env file example
+    cmds:
+      - echo "Running custom env file example..."
+      - ./example/custom_env_file.sh
+
+  install:
+    desc: Run the install script locally
+    cmds:
+      - echo "Running install script..."
+      - ./install.sh
+
+  validate:
+    desc: Run all validation checks
+    deps: [lint, test]
+    cmds:
+      - echo "All validation checks completed successfully!"
+
+  ci:
+    desc: Run CI pipeline (install, test, validate)
+    cmds:
+      - task: install-shellspec
+      - task: test
+      - task: examples
+      - echo "CI pipeline completed successfully!"
+
+  help:
+    desc: Show available tasks
+    cmds:
+      - task --list

@@ -20,7 +20,7 @@ The tests use ShellSpec, which will be automatically installed when you run the 
 
 ```bash
 # Run all tests (installs ShellSpec if needed)
-make test
+task test
 
 # Or run ShellSpec directly
 shellspec
@@ -30,19 +30,25 @@ shellspec
 
 ```bash
 # Run basic tests only
-make test-basic
+task test-basic
 
 # Run all tests
-make test
+task test
 
 # Run tests with verbose output
-make test-verbose
+task test-verbose
 
 # Run tests with coverage (if available)
-make test-coverage
+task test-coverage
+
+# Run tests in watch mode (requires entr)
+task test-watch
 
 # Install ShellSpec manually
-make install-shellspec
+task install-shellspec
+
+# Show all available tasks
+task help
 ```
 
 ## Test Coverage
@@ -135,18 +141,21 @@ To integrate with CI/CD systems:
 
 ```yaml
 # GitHub Actions example
-- name: Run tests
+- name: Install Task
   run: |
-    make install-shellspec
-    make test
+    curl -sL https://taskfile.dev/install.sh | sh
+    sudo mv ./bin/task /usr/local/bin/
+    
+- name: Run tests
+  run: task test
 ```
 
 ```bash
 # Simple CI script
 #!/bin/bash
 set -e
-make install-shellspec
-make test
+task install-shellspec
+task test
 echo "All tests passed!"
 ```
 
