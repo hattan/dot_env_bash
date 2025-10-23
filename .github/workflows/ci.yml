@@ -19,6 +19,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Setup test environment
+      run: |
+        # Create .env file from example if it doesn't exist
+        if [ ! -f .env ]; then
+          cp .env.example .env
+          echo "Created .env from .env.example"
+        fi
+        
     - name: Install Task
       uses: arduino/setup-task@v2
       with:
@@ -73,6 +81,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Setup test environment
+      run: |
+        # Create .env file from example if it doesn't exist
+        if [ ! -f .env ]; then
+          cp .env.example .env
+          echo "Created .env from .env.example"
+        fi
+        
     - name: Install Task
       uses: arduino/setup-task@v2
       with:
@@ -110,6 +126,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Setup test environment
+      run: |
+        # Create .env file from example if it doesn't exist
+        if [ ! -f .env ]; then
+          cp .env.example .env
+          echo "Created .env from .env.example"
+        fi
+        
     - name: Install Task
       uses: arduino/setup-task@v2
       with:
