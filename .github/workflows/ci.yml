@@ -104,7 +104,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        shell: [bash]
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -118,5 +117,4 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Run basic tests on ${{ matrix.os }}
-      shell: ${{ matrix.shell }}
       run: task test-basic
