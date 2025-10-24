@@ -28,9 +28,7 @@ curl -fsSL https://raw.githubusercontent.com/hattan/dot_env_bash/main/install.sh
 Simply source the library in your script:
 
 ```bash
-# Set SCRIPT_DIR to enable relative path resolution
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-source "$SCRIPT_DIR/lib/dot_env.sh"
+source "$./lib/dot_env.sh"
 ```
 
 ## Quick Start
