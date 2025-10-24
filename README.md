@@ -50,8 +50,7 @@ DEBUG=true
 ```bash
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-source "$SCRIPT_DIR/lib/dot_env.sh"
+source "./lib/dot_env.sh"
 
 # Load all variables from .env
 dot_env_load
