@@ -2,6 +2,8 @@
 
 # imports
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+# shellcheck source=../lib/dot_env.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR/../lib/dot_env.sh"
 
 

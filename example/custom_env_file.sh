@@ -2,10 +2,12 @@
 
 # imports
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+# shellcheck source=../lib/dot_env.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR/../lib/dot_env.sh"
 
 # Set this global variable to point to a different env file
-DOT_ENV_FILE="$SCRIPT_DIR/test.env"
+export DOT_ENV_FILE="$SCRIPT_DIR/test.env"
 
 main() {
     dot_env_set "HELLO" "world"

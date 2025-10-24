@@ -17,7 +17,10 @@ dot_env_load () {
             [[ $line =~ ^[[:space:]]*$ ]] && continue
             [[ $line =~ ^[[:space:]]*# ]] && continue
             # Remove inline comments and export
+            # shellcheck disable=SC2001
             line=$(echo "$line" | sed 's/#.*//')
+            # Export the variable (disable SC2163 as we want to export the line content)
+            # shellcheck disable=SC2163
             export "$line"
         done < "$DOT_ENV_FILE"
     else 
