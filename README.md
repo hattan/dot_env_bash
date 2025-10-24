@@ -26,7 +26,7 @@ curl -fsSL https://raw.githubusercontent.com/hattan/dot_env_bash/main/install.sh
 ### Manual Installation
 
 - Download dot_env.sh from https://github.com/hattan/dot_env_bash/blob/main/lib/dot_env.sh 
-- In your main bash script, reference the downloaded file `source "$./lib/dot_env.sh"` (in this case, it is assumed dot_env.sh is placed in a lib folder)
+- In your main bash script, reference the downloaded file `source "./lib/dot_env.sh"` (in this case, it is assumed dot_env.sh is placed in a lib folder)
 
 
 ## Quick Start
